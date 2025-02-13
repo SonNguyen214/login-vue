@@ -12,4 +12,5 @@ export const useCheckAuth = defineStore('counter', {
       this.authenticate = false
     },
   },
+  getters: {},
 })

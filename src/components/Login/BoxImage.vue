@@ -1,5 +1,12 @@
 <template>
-  <div class="box-image" ref="boxImageRef">
+  <div class="box-image relative" ref="boxImageRef">
+    <div
+      @click="() => router.push(pages.home)"
+      class="flex items-center gap-1 text-sm absolute top-[25px] left-[30px] cursor-pointer"
+      ref="backRef"
+    >
+      <i class="pi pi-arrow-left"></i> <span>Back</span>
+    </div>
     <div class="h-full flex items-center">
       <div class="max-w-[350px] img-login">
         <Carousel
@@ -42,7 +49,12 @@ const emit = defineEmits(['handleChangeForm'])
 import { ref, onMounted } from 'vue'
 import Carousel from 'primevue/carousel'
 import gsap from 'gsap'
+import { useRouter } from 'vue-router'
+import { pages } from '@/constants'
+
+const router = useRouter()
 const textRef = ref('')
+const backRef = ref()
 
 onMounted(() => {
   gsap.fromTo(
@@ -52,6 +64,17 @@ onMounted(() => {
       opacity: 1,
       duration: 0.5,
       delay: 2,
+      ease: 'power1.inOut',
+    },
+  )
+  gsap.fromTo(
+    backRef.value,
+    { opacity: 0, x: 100 },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 0.5,
+      delay: 1,
       ease: 'power1.inOut',
     },
   )

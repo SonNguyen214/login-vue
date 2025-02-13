@@ -4,29 +4,31 @@
       {{ formTitle }}
     </h1>
     <div class="des" ref="desRef">Please enter your details</div>
-    <Form :resolver @submit="onFormSubmit">
-      <div class="form-inputs" ref="formRef">
-        <FormField v-slot="$field" name="username" initialValue="">
-          <FloatLabel>
-            <InputText
-              type="text"
-              :disabled="isLoading"
-              :class="[{ error: $field?.invalid }]"
-              v-bind="$field.props"
-              id="username"
-            />
-            <label for="username">Your Name</label>
-          </FloatLabel>
-          <span
-            style="font-size: 10px; color: red; text-align: start"
-            v-if="$field?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-            >{{ $field.error?.message }}</span
-          >
-        </FormField>
-        <div>
+    <Form :resolver @submit="onFormSubmit" ref="formRef">
+      <div class="form-inputs">
+        <div ref="nameRef">
+          <FormField v-slot="$field" name="username" initialValue="">
+            <FloatLabel>
+              <InputText
+                type="text"
+                :disabled="isLoading"
+                :class="[{ error: $field?.invalid }]"
+                v-bind="$field.props"
+                id="username"
+              />
+              <label for="username">Your Name</label>
+            </FloatLabel>
+            <span
+              style="font-size: 10px; color: red; text-align: start"
+              v-if="$field?.invalid"
+              severity="error"
+              size="small"
+              variant="simple"
+              >{{ $field.error?.message }}</span
+            >
+          </FormField>
+        </div>
+        <div ref="passwordRef">
           <FormField v-slot="$field" name="password" initialValue="">
             <FloatLabel>
               <Password
@@ -112,8 +114,10 @@ const socialsRef = ref([])
 const lineRef = ref()
 const titleRef = ref()
 const desRef = ref()
-const formRef = ref()
+const nameRef = ref()
+const passwordRef = ref()
 const btnRef = ref()
+const formRef = ref()
 const formTitle = computed(() => (props.showFormSignUp ? 'Create new account' : 'Welcome Back!'))
 const btnText = computed(() => (props.showFormSignUp ? 'Login now' : 'Request Now'))
 
@@ -122,6 +126,11 @@ const socialsArr = [
   { imageUrl: './gg-icon.png', class: 'google' },
   { imageUrl: './apple-icon.png', class: 'apple' },
 ]
+
+const resetForm = () => {
+  formRef.value?.reset()
+}
+
 const resolver = zodResolver(
   z.object({
     username: z.string().min(1, { message: 'Your Name is required.' }),
@@ -142,13 +151,14 @@ onMounted(() => {
   )
     .fromTo(
       textElement.querySelectorAll('.letter'),
-      { opacity: 0, x: -10 },
+      { opacity: 0, x: -10, y: -10 },
       {
         opacity: 1,
         x: 0,
+        y: 0,
         duration: 0.5,
         stagger: 0.05,
-        ease: 'power2.out',
+        ease: 'power1.out',
       },
     )
     .fromTo(
@@ -156,18 +166,28 @@ onMounted(() => {
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 0.5,
-        ease: 'power1.inOut',
+        duration: 0.4,
+        ease: 'power1.out',
       },
     )
     .fromTo(
-      formRef.value,
+      nameRef.value,
       { opacity: 0, y: 100 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.5,
-        ease: 'power1.inOut',
+        duration: 0.4,
+        ease: 'power1.out',
+      },
+    )
+    .fromTo(
+      passwordRef.value,
+      { opacity: 0, y: 100 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        ease: 'power1.out',
       },
     )
     .fromTo(
@@ -176,7 +196,7 @@ onMounted(() => {
       {
         scale: 1,
         duration: 0.5,
-        ease: 'power1.inOut',
+        ease: 'power1.out',
       },
     )
     .fromTo(
@@ -184,8 +204,8 @@ onMounted(() => {
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 0.5,
-        ease: 'power1.inOut',
+        duration: 0.4,
+        ease: 'power1.out',
       },
     )
     .fromTo(
@@ -193,8 +213,8 @@ onMounted(() => {
       { scale: 0 },
       {
         scale: 1,
-        duration: 0.5,
-        ease: 'power1.inOut',
+        duration: 0.3,
+        ease: 'power1.out',
       },
     )
     .fromTo(
@@ -202,8 +222,8 @@ onMounted(() => {
       { scale: 0 },
       {
         scale: 1,
-        duration: 0.5,
-        ease: 'power1.inOut',
+        duration: 0.3,
+        ease: 'power1.out',
       },
     )
     .fromTo(
@@ -211,8 +231,8 @@ onMounted(() => {
       { scale: 0 },
       {
         scale: 1,
-        duration: 0.5,
-        ease: 'power1.inOut',
+        duration: 0.3,
+        ease: 'power1.out',
       },
     )
 })
@@ -228,6 +248,7 @@ const onFormSubmit = async ({ values }) => {
         life: 3000,
       })
       emit('handleChangeForm')
+      resetForm()
       return
     }
     const res = await axios.post(props.showFormSignUp ? apiUrl.signUp : apiUrl.login, {

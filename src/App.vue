@@ -17,7 +17,7 @@ watch(pathname, (value) => {
 <template>
   <Header :show-header="!path.includes(pages.login)" />
   <RouterView />
-  <Toast position="top-right" />
+  <Toast position="bottom-left" />
 </template>
 
 <style></style>

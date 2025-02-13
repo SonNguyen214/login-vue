@@ -1,0 +1,12 @@
+.custom-button {
+  @apply w-full transition-all text-[white] h-10 items-center !font-semibold rounded-[20px] bg-[#333];
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-3px);
+    &:active {
+      box-shadow: none;
+      transform: translateY(0);
+    }
+  }
+}

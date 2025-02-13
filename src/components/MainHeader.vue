@@ -24,7 +24,7 @@ const handleLogout = async () => {
     auth.logout()
     toast.add({
       severity: 'info',
-      summary: 'Logout success!',
+      summary: 'You logged out!',
       life: 3000,
     })
   } catch (error) {

@@ -1,8 +1,8 @@
 .p-toast {
-  @apply h-fit pointer-events-none;
+  @apply h-fit;
 
   .p-toast-message {
-    @apply px-10 py-5;
+    @apply px-10 py-5 pointer-events-none;
   }
 
   .p-toast-message-content {

@@ -8,6 +8,7 @@ import ToastService from 'primevue/toastservice'
 import Aura from '@primevue/themes/aura'
 import { createPinia } from 'pinia'
 import 'primeicons/primeicons.css'
+import CustomButton from './components/Custom/CustomButton.vue'
 
 const app = createApp(App)
 
@@ -25,6 +26,8 @@ app.use(PrimeVue, {
     },
   },
 })
+
+app.component('CustomButton', CustomButton)
 
 app.use(ToastService)
 

@@ -40,7 +40,7 @@
 
             .p-floatlabel {
               label {
-                @apply text-xs md:text-sm text-[#333] left-0;
+                @apply text-xs md:text-sm text-[#7f7f7f] left-0;
               }
             }
           }
@@ -112,7 +112,7 @@
           }
 
           span {
-            @apply absolute -translate-x-2/4 w-2/5 bg-[white] font-semibold text-xs left-2/4 top-0;
+            @apply absolute text-[#7f7f7f] -translate-x-2/4 w-2/5 bg-[white] font-normal text-xs left-2/4 top-0;
           }
         }
 
