@@ -1,24 +1,27 @@
 .login-page {
-  @apply w-dvw h-dvh p-5;
+  @apply w-dvw h-dvh p-5 bg-[url('/bg.jpg')] bg-no-repeat bg-center bg-cover;
   .login-container {
-    @apply fixed -translate-x-2/4 -translate-y-2/4 bg-[#e1dede] overflow-hidden max-w-fit md:max-w-[800px] w-full flex min-h-fit justify-between rounded-md md:rounded-2xl left-2/4 top-[40%];
+    @apply fixed -translate-x-2/4 -translate-y-2/4 bg-[#cfcfcf] overflow-hidden max-w-fit md:max-w-[800px] w-full flex min-h-fit justify-between rounded-md md:rounded-2xl left-2/4 top-[40%];
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     .box-image {
-      @apply p-[30px] text-center md:block hidden;
+      @apply p-[30px] py-[40px] text-center md:flex flex-col justify-between hidden;
       img {
-        @apply w-[350px];
+        @apply w-[350px] h-[350px];
+      }
+      button {
+        @apply hidden;
       }
     }
 
     .text-register {
-      @apply text-xs text-[#333] text-center !mt-20;
+      @apply text-xs text-[#333] text-center;
       span {
         @apply transition-all !font-bold cursor-pointer underline;
       }
     }
 
     .box-form {
-      @apply w-[46%] min-w-[340px] bg-white text-center !m-2 p-[30px] md:p-[50px] rounded-xl;
+      @apply w-[46%] min-w-[340px] bg-white text-center !m-2 p-[30px] md:p-[50px] md:py-[40px] rounded-xl;
       .title {
         @apply text-[24px] md:text-[28px] !font-bold w-full whitespace-nowrap;
       }
@@ -46,8 +49,27 @@
             @apply flex text-xs justify-between !mt-2 md:!mt-0;
 
             .text {
-              @apply cursor-pointer underline;
+              @apply cursor-pointer underline text-[#7f7f7f];
+
+              &:hover {
+                @apply text-black;
+              }
             }
+          }
+        }
+
+        .p-password {
+          @apply !block border-[unset] border-b-[2px];
+
+          input {
+            @apply border-none;
+          }
+
+          svg {
+            @apply top-[20%];
+          }
+          &.error {
+            @apply border-b-red-600;
           }
         }
 
@@ -67,11 +89,11 @@
       }
 
       .btn-submit {
-        @apply transition-all text-[white] h-10 items-center !font-semibold rounded-[20px] bg-[#333];
+        @apply w-full transition-all text-[white] h-10 items-center !font-semibold rounded-[20px] bg-[#333];
 
         &:hover {
           box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-          transform: translateY(-2px);
+          transform: translateY(-3px);
           &:active {
             box-shadow: none;
             transform: translateY(0);
@@ -96,9 +118,8 @@
 
         .socials {
           @apply transition-all flex items-center h-fit w-full gap-7 md:gap-10 justify-center mx-auto !mt-4 md:!mt-8;
-          transition: 0.5s;
           .p-image {
-            @apply w-[30px] h-[30px] md:w-[40px] md:h-[40px] block cursor-pointer;
+            @apply rounded-full transition-all w-[30px] h-[30px] md:w-[40px] md:h-[40px] block cursor-pointer;
 
             &.google {
               @apply w-[26px] h-[26px] md:!w-[35px] md:!h-[35px];
@@ -118,4 +139,8 @@
       }
     }
   }
+}
+
+.p-password-overlay {
+  @apply !hidden;
 }

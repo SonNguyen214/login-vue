@@ -1,15 +1,15 @@
 .p-toast {
-    @apply h-fit;
+  @apply h-fit pointer-events-none;
 
-    .p-toast-message {
-        @apply  px-10 py-5;
+  .p-toast-message {
+    @apply px-10 py-5;
+  }
+
+  .p-toast-message-content {
+    @apply items-center gap-7;
+
+    .p-toast-message-text {
+      @apply block;
     }
-
-    .p-toast-message-content {
-        @apply items-center gap-7;
-
-        .p-toast-message-text {
-            @apply block;
-        }
-    }
+  }
 }

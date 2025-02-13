@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { RouterView, useRouter } from 'vue-router'
-import { pages } from './contants'
+import { pages } from './constants'
 import Toast from 'primevue/toast'
 import Header from './components/MainHeader.vue'
 const router = useRouter()
@@ -17,7 +17,7 @@ watch(pathname, (value) => {
 <template>
   <Header :show-header="!path.includes(pages.login)" />
   <RouterView />
-  <Toast position="bottom-right"/>
+  <Toast position="top-right" />
 </template>
 
 <style></style>

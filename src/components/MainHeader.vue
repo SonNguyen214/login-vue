@@ -3,11 +3,10 @@ defineProps({
   showHeader: Boolean,
 })
 
-// import axios from 'axios'
 import { Button } from 'primevue'
 import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
-import { pages } from '@/contants'
+import { pages } from '@/constants'
 import { useToast } from 'primevue/usetoast'
 import { useCheckAuth } from '@/store/authen'
 
@@ -55,7 +54,7 @@ onMounted(() => {
         <div class="item">Help</div>
       </nav>
       <div class="account">
-        <Button @click="handleLogout" :label="auth.authenticate ? 'Logout' : 'Login'" />
+        <Button @click="handleLogout" :label="auth.authenticate ? 'Logout' : 'Get started'" />
         <div class="avatar">Avatar</div>
       </div>
     </div>
