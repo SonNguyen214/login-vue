@@ -96,14 +96,14 @@ import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
 import { Form, FormField } from '@primevue/forms'
 import { Button, InputText, Image, FloatLabel } from 'primevue'
-import axios from 'axios'
 import { useRouter } from 'vue-router'
-import { apiUrl, pages } from '@/constants'
+import { pages } from '@/constants'
 import { computed, onMounted, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useCheckAuth } from '@/store/authen'
 import gsap from 'gsap'
 import Password from 'primevue/password'
+import { requestLogin } from '@/services'
 
 const toast = useToast()
 const auth = useCheckAuth()
@@ -147,7 +147,7 @@ onMounted(() => {
   tl.fromTo(
     boxFormRef.value,
     { opacity: 0, x: -200 },
-    { opacity: 1, x: 0, duration: 1.5, ease: 'power2.inOut' },
+    { opacity: 1, x: 0, duration: 1.2, ease: 'power1.out' },
   )
     .fromTo(
       textElement.querySelectorAll('.letter'),
@@ -156,7 +156,7 @@ onMounted(() => {
         opacity: 1,
         x: 0,
         y: 0,
-        duration: 0.5,
+        duration: 0.4,
         stagger: 0.05,
         ease: 'power1.out',
       },
@@ -166,7 +166,7 @@ onMounted(() => {
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 0.4,
+        duration: 0.3,
         ease: 'power1.out',
       },
     )
@@ -176,7 +176,7 @@ onMounted(() => {
       {
         opacity: 1,
         y: 0,
-        duration: 0.4,
+        duration: 0.3,
         ease: 'power1.out',
       },
     )
@@ -186,7 +186,7 @@ onMounted(() => {
       {
         opacity: 1,
         y: 0,
-        duration: 0.4,
+        duration: 0.3,
         ease: 'power1.out',
       },
     )
@@ -195,7 +195,7 @@ onMounted(() => {
       { scale: 0 },
       {
         scale: 1,
-        duration: 0.5,
+        duration: 0.3,
         ease: 'power1.out',
       },
     )
@@ -204,7 +204,7 @@ onMounted(() => {
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 0.4,
+        duration: 0.2,
         ease: 'power1.out',
       },
     )
@@ -213,7 +213,7 @@ onMounted(() => {
       { scale: 0 },
       {
         scale: 1,
-        duration: 0.3,
+        duration: 0.2,
         ease: 'power1.out',
       },
     )
@@ -222,7 +222,7 @@ onMounted(() => {
       { scale: 0 },
       {
         scale: 1,
-        duration: 0.3,
+        duration: 0.2,
         ease: 'power1.out',
       },
     )
@@ -231,7 +231,7 @@ onMounted(() => {
       { scale: 0 },
       {
         scale: 1,
-        duration: 0.3,
+        duration: 0.2,
         ease: 'power1.out',
       },
     )
@@ -251,10 +251,8 @@ const onFormSubmit = async ({ values }) => {
       resetForm()
       return
     }
-    const res = await axios.post(props.showFormSignUp ? apiUrl.signUp : apiUrl.login, {
-      user_id: values.username,
-      password: values.password,
-    })
+
+    const res = await requestLogin({ user_id: values.username, password: values.password })
 
     if (res.status === 200) {
       localStorage.setItem('accessToken', res.data.token)

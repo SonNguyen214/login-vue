@@ -4,6 +4,7 @@
     :label="label"
     :class="'custom-button ' + checkButton()"
     :loading="isLoading"
+    :type="type"
   />
 </template>
 
@@ -12,6 +13,7 @@ const props = defineProps({
   label: String,
   variant: String,
   isLoading: Boolean,
+  type: String,
 })
 
 const emit = defineEmits(['handleClick'])

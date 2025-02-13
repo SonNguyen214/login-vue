@@ -5,30 +5,47 @@ defineProps({
 
 import { Button } from 'primevue'
 import { useRouter } from 'vue-router'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { pages } from '@/constants'
 import { useToast } from 'primevue/usetoast'
 import { useCheckAuth } from '@/store/authen'
+import { requestLogout } from '@/services'
 
 const toast = useToast()
 const router = useRouter()
 const auth = useCheckAuth()
+const isLoading = ref(false)
 
 const handleLogout = async () => {
+  //if user is not logged in --> redirect to login page
   if (!auth.authenticate) {
     router.push(pages.login)
     return
   }
+  isLoading.value = true
+  const token = localStorage.getItem('accessToken') || ''
   try {
-    localStorage.setItem('accessToken', '')
-    auth.logout()
-    toast.add({
-      severity: 'info',
-      summary: 'You logged out!',
-      life: 3000,
-    })
+    const response = await requestLogout(token)
+    if (response.status === 200) {
+      localStorage.setItem('accessToken', '')
+      auth.logout()
+      toast.add({
+        severity: 'info',
+        summary: response.data.message || 'You logged out!',
+        life: 3000,
+      })
+    }
   } catch (error) {
-    console.log(error)
+    if (error?.response) {
+      toast.add({
+        severity: 'error',
+        summary: 'Logout Failed!',
+        detail: error?.response?.data?.message || 'Something went wrong!! Please try again',
+        life: 3000,
+      })
+    }
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -54,7 +71,11 @@ onMounted(() => {
         <div class="item">Help</div>
       </nav>
       <div class="account">
-        <Button @click="handleLogout" :label="auth.authenticate ? 'Logout' : 'Get started'" />
+        <Button
+          :loading="isLoading"
+          @click="handleLogout"
+          :label="auth.authenticate ? 'Logout' : 'Get started'"
+        />
         <div class="avatar">Avatar</div>
       </div>
     </div>

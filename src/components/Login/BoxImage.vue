@@ -62,7 +62,7 @@ onMounted(() => {
     { opacity: 0 },
     {
       opacity: 1,
-      duration: 0.5,
+      duration: 0.3,
       delay: 2,
       ease: 'power1.inOut',
     },
@@ -73,7 +73,7 @@ onMounted(() => {
     {
       opacity: 1,
       x: 0,
-      duration: 0.5,
+      duration: 0.3,
       delay: 1,
       ease: 'power1.inOut',
     },
