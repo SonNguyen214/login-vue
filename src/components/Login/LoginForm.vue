@@ -80,7 +80,7 @@
         </div>
       </div>
     </div>
-    <div class="text-register">
+    <div class="text-register" ref="registerRef">
       {{ showFormSignUp ? 'Already have an account?' : "Don't have an account?" }}
       <span @click="() => emit('handleChangeForm')">{{ btnText }}</span>
     </div>
@@ -118,6 +118,7 @@ const nameRef = ref()
 const passwordRef = ref()
 const btnRef = ref()
 const formRef = ref()
+const registerRef = ref()
 const formTitle = computed(() => (props.showFormSignUp ? 'Create new account' : 'Welcome Back!'))
 const btnText = computed(() => (props.showFormSignUp ? 'Login now' : 'Request Now'))
 
@@ -141,13 +142,13 @@ const resolver = zodResolver(
 onMounted(() => {
   const tl = gsap.timeline()
   const textElement = titleRef.value
-  const splitText = textElement.innerText.split('') // Tách từng chữ cái thành mảng
+  const splitText = textElement.innerText.split('') // split each text to array
   textElement.innerHTML = splitText.map((char) => `<span class="letter">${char}</span>`).join('')
 
   tl.fromTo(
     boxFormRef.value,
     { opacity: 0, x: -200 },
-    { opacity: 1, x: 0, duration: 1.2, ease: 'power1.out' },
+    { opacity: 1, x: 0, duration: 1, ease: 'power1.out' },
   )
     .fromTo(
       textElement.querySelectorAll('.letter'),
@@ -156,7 +157,7 @@ onMounted(() => {
         opacity: 1,
         x: 0,
         y: 0,
-        duration: 0.4,
+        duration: 0.3,
         stagger: 0.05,
         ease: 'power1.out',
       },
@@ -166,7 +167,7 @@ onMounted(() => {
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 0.3,
+        duration: 0.2,
         ease: 'power1.out',
       },
     )
@@ -235,11 +236,21 @@ onMounted(() => {
         ease: 'power1.out',
       },
     )
+    .fromTo(
+      registerRef.value,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.2,
+        ease: 'power1.out',
+      },
+    )
 })
 
 const onFormSubmit = async ({ values }) => {
   isLoading.value = true
   try {
+    //Fake sign up (Doesn't have api from BE)
     if (props.showFormSignUp) {
       toast.add({
         severity: 'success',

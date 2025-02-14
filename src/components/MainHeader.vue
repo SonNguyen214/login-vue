@@ -16,6 +16,16 @@ const router = useRouter()
 const auth = useCheckAuth()
 const isLoading = ref(false)
 
+//check user login status when come in home
+onMounted(() => {
+  const token = localStorage.getItem('accessToken')
+  if (token && token.length > 0) {
+    auth.login()
+  } else {
+    auth.logout()
+  }
+})
+
 const handleLogout = async () => {
   //if user is not logged in --> redirect to login page
   if (!auth.authenticate) {
@@ -48,15 +58,6 @@ const handleLogout = async () => {
     isLoading.value = false
   }
 }
-
-onMounted(() => {
-  const token = localStorage.getItem('accessToken')
-  if (token && token.length > 0) {
-    auth.login()
-  } else {
-    auth.logout()
-  }
-})
 </script>
 
 <template>

@@ -1,12 +1,5 @@
 <template>
-  <div class="box-image relative" ref="boxImageRef">
-    <div
-      @click="() => router.push(pages.home)"
-      class="flex items-center gap-1 text-sm absolute top-[25px] left-[30px] cursor-pointer"
-      ref="backRef"
-    >
-      <i class="pi pi-arrow-left"></i> <span>Back</span>
-    </div>
+  <div class="box-image" ref="boxImageRef">
     <div class="h-full flex items-center">
       <div class="max-w-[350px] img-login">
         <Carousel
@@ -32,12 +25,15 @@
         </Carousel>
       </div>
     </div>
-    <div class="text-register" ref="textRef">
+    <div @click="() => router.push(pages.home)" class="back-to-home" ref="backRef">
+      <i class="pi pi-arrow-left"></i> <span>Go back</span>
+    </div>
+    <!-- <div class="text-register" ref="textRef">
       {{ showFormSignUp ? 'Already have an account?' : "Don't have an account?" }}
       <span @click="() => emit('handleChangeForm')">{{
         showFormSignUp ? 'Login now' : 'Request Now'
       }}</span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -45,7 +41,6 @@
 defineProps({
   showFormSignUp: Boolean,
 })
-const emit = defineEmits(['handleChangeForm'])
 import { ref, onMounted } from 'vue'
 import Carousel from 'primevue/carousel'
 import gsap from 'gsap'
@@ -53,29 +48,17 @@ import { useRouter } from 'vue-router'
 import { pages } from '@/constants'
 
 const router = useRouter()
-const textRef = ref('')
 const backRef = ref()
 
 onMounted(() => {
   gsap.fromTo(
-    textRef.value,
+    backRef.value,
     { opacity: 0 },
     {
       opacity: 1,
-      duration: 0.3,
-      delay: 2,
-      ease: 'power1.inOut',
-    },
-  )
-  gsap.fromTo(
-    backRef.value,
-    { opacity: 0, x: 100 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 0.3,
-      delay: 1,
-      ease: 'power1.inOut',
+      delay: 1.5,
+      duration: 0.2,
+      ease: 'power1.out',
     },
   )
 })
