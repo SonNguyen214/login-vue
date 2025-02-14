@@ -1,10 +1,10 @@
 .login-page {
   @apply w-dvw h-dvh p-5 bg-[url('/img/login/bg.jpg')] bg-no-repeat bg-center bg-cover;
   .login-container {
-    @apply fixed -translate-x-2/4 -translate-y-2/4 bg-[#cfcfcf] overflow-hidden max-w-fit md:max-w-[800px] w-full flex min-h-fit justify-between rounded-md md:rounded-2xl left-2/4 top-[40%];
+    @apply fixed -translate-x-2/4 -translate-y-2/4 bg-[#cfcfcf] overflow-hidden max-w-fit md:max-w-[800px] w-full flex min-h-fit rounded-md md:rounded-2xl left-2/4 top-[40%];
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     .box-image {
-      @apply p-[30px] py-[40px] text-center md:flex flex-col justify-between hidden relative;
+      @apply p-[30px] py-[40px] text-center md:flex flex-col justify-between hidden relative w-[53%];
       .back-to-home {
         @apply border text-[#333] font-semibold transition-all border-[#666666] px-2 py-1 rounded-full flex items-center m-auto w-fit gap-1 text-sm relative cursor-pointer;
         .pi-arrow-left {
@@ -23,7 +23,7 @@
       }
 
       img {
-        @apply w-[350px] h-[380px];
+        @apply w-full h-[380px];
       }
       button {
         @apply hidden;
@@ -49,7 +49,7 @@
     }
 
     .box-form {
-      @apply w-[46%] min-w-[340px] bg-white text-center !m-2 p-[30px] md:p-[50px] md:py-[40px] rounded-xl;
+      @apply w-[46%] min-w-[340px] bg-white text-center !m-2 md:!ml-0  p-[30px] md:p-[50px] md:py-[40px] rounded-xl;
       .title {
         @apply text-[24px] md:text-[28px] !font-bold w-full whitespace-nowrap;
       }

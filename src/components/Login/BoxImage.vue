@@ -1,7 +1,7 @@
 <template>
   <div class="box-image" ref="boxImageRef">
-    <div class="h-full flex items-center">
-      <div class="max-w-[350px] img-login">
+    <div class="w-full h-full flex items-center">
+      <div class="img-login">
         <Carousel
           :value="products"
           :numVisible="1"
