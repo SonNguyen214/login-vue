@@ -122,9 +122,9 @@ const formTitle = computed(() => (props.showFormSignUp ? 'Create new account' : 
 const btnText = computed(() => (props.showFormSignUp ? 'Login now' : 'Request Now'))
 
 const socialsArr = [
-  { imageUrl: './fb-icon.png', class: 'facebook' },
-  { imageUrl: './gg-icon.png', class: 'google' },
-  { imageUrl: './apple-icon.png', class: 'apple' },
+  { imageUrl: './img/login/fb-icon.png', class: 'facebook' },
+  { imageUrl: './img/login/gg-icon.png', class: 'google' },
+  { imageUrl: './img/login/apple-icon.png', class: 'apple' },
 ]
 
 const resetForm = () => {

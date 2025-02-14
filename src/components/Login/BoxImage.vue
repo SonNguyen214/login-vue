@@ -82,13 +82,13 @@ onMounted(() => {
 
 const products = ref([
   {
-    url: '/bg-login.png',
+    url: '/img/login/slide1.png',
   },
   {
-    url: '/bg-login1.webp',
+    url: '/img/login/slide2.webp',
   },
   {
-    url: '/bg-login2.png',
+    url: '/img/login/slide3.png',
   },
 ])
 </script>
