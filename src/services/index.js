@@ -1,4 +1,4 @@
-import { axiosBase } from '@/components/utils/axios'
+import { axiosBase } from '@/utils/axios'
 
 export const requestLogin = ({ user_id, password }) => {
   let config = {
