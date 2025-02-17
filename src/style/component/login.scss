@@ -1,7 +1,7 @@
 .login-page {
   @apply w-dvw h-dvh p-5 bg-[url('/img/login/bg.jpg')] bg-no-repeat bg-center bg-cover;
   .login-container {
-    @apply fixed -translate-x-2/4 -translate-y-2/4 bg-[#cfcfcf] overflow-hidden max-w-fit md:max-w-[800px] w-full flex min-h-fit rounded-md md:rounded-2xl left-2/4 top-[40%];
+    @apply fixed -translate-x-2/4 -translate-y-2/4 bg-[#cfcfcf] overflow-hidden max-w-fit md:max-w-[800px] w-full flex min-h-fit rounded-md md:rounded-2xl left-2/4 top-[50%];
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     .box-image {
       @apply p-[30px] py-[40px] text-center md:flex flex-col justify-between hidden relative w-[53%];

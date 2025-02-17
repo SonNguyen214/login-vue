@@ -4,6 +4,7 @@ import { RouterView, useRouter } from 'vue-router'
 import { pages } from './constants'
 import Toast from 'primevue/toast'
 import Header from './components/MainHeader.vue'
+// import CustomCursor from './components/Custom/CustomCursor.vue'
 const router = useRouter()
 const path = ref('')
 
@@ -15,9 +16,10 @@ watch(pathname, (value) => {
 </script>
 
 <template>
+  <!-- <CustomCursor /> -->
   <Header :show-header="!path.includes(pages.login)" />
   <RouterView />
-  <Toast position="bottom-left" />
+  <Toast position="top-right" />
 </template>
 
 <style></style>
