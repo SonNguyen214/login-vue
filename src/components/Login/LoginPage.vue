@@ -1,9 +1,19 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import BoxImage from './BoxImage.vue'
 import LoginForm from './LoginForm.vue'
+import { useRouter } from 'vue-router'
+import { pages } from '@/constants'
 
 const showFormSignUp = ref(false)
+const router = useRouter()
+
+onMounted(() => {
+  const token = localStorage.getItem('accessToken')
+  if (token && token.length > 0) {
+    router.push(pages.home)
+  }
+})
 
 const handleChangeForm = () => {
   showFormSignUp.value = !showFormSignUp.value

@@ -6,57 +6,31 @@ defineProps({
 import { Button } from 'primevue'
 import { useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
-import { pages } from '@/constants'
+import { localStorageKey, pages } from '@/constants'
 import { useToast } from 'primevue/usetoast'
-import { useCheckAuth } from '@/store/authen'
-import { requestLogout } from '@/services'
+import { handleLogout } from '@/utils/auth'
 
 const toast = useToast()
 const router = useRouter()
-const auth = useCheckAuth()
 const isLoading = ref(false)
+const accessToken = ref('')
 
 //check user login status when come in home
 onMounted(() => {
-  const token = localStorage.getItem('accessToken')
-  if (token && token.length > 0) {
-    auth.login()
-  } else {
-    auth.logout()
-  }
+  const token = localStorage.getItem(localStorageKey.accessToken)
+  accessToken.value = token || ''
 })
 
-const handleLogout = async () => {
+const onLogout = async () => {
   //if user is not logged in --> redirect to login page
-  if (!auth.authenticate) {
+  if (accessToken.value.length <= 0) {
     router.push(pages.login)
     return
   }
   isLoading.value = true
-  const token = localStorage.getItem('accessToken') || ''
-  try {
-    const response = await requestLogout(token)
-    if (response.status === 200) {
-      localStorage.setItem('accessToken', '')
-      auth.logout()
-      toast.add({
-        severity: 'info',
-        summary: response.data.message || 'You logged out!',
-        life: 3000,
-      })
-    }
-  } catch (error) {
-    if (error?.response) {
-      toast.add({
-        severity: 'error',
-        summary: 'Logout Failed!',
-        detail: error?.response?.data?.message || 'Something went wrong!! Please try again',
-        life: 3000,
-      })
-    }
-  } finally {
-    isLoading.value = false
-  }
+  await handleLogout({ toast: toast })
+  accessToken.value = ''
+  isLoading.value = false
 }
 </script>
 
@@ -74,8 +48,8 @@ const handleLogout = async () => {
       <div class="account">
         <Button
           :loading="isLoading"
-          @click="handleLogout"
-          :label="auth.authenticate ? 'Logout' : 'Get started'"
+          @click="onLogout"
+          :label="accessToken.length > 0 ? 'Logout' : 'Get started'"
         />
         <div class="avatar">Avatar</div>
       </div>

@@ -51,7 +51,7 @@
     .box-form {
       @apply w-[46%] min-w-[340px] bg-white text-center !m-2 md:!ml-0  p-[30px] md:p-[50px] md:py-[40px] rounded-xl;
       .title {
-        @apply text-[24px] md:text-[28px] !font-bold w-full whitespace-nowrap;
+        @apply text-[24px] md:text-[28px] !font-bold w-full whitespace-nowrap text-[#333];
       }
       .des {
         @apply text-xs text-[#575656] font-medium whitespace-nowrap !mb-4 md:!mb-[30px];
@@ -68,7 +68,7 @@
 
             .p-floatlabel {
               label {
-                @apply text-xs md:text-sm text-[#7f7f7f] left-0;
+                @apply text-xs md:text-sm text-[#7f7f7f] left-0 bg-transparent;
               }
             }
           }
@@ -87,7 +87,7 @@
         }
 
         .p-password {
-          @apply !block border-[unset] border-b-[2px];
+          @apply !block border-[unset] border-b-[#333] border-b-[2px];
 
           input {
             @apply border-none;
@@ -103,8 +103,8 @@
 
         input {
           @apply w-full p-[5px] border-[unset] rounded-none border-b-[2px] border-b-[#333] outline-none shadow-[unset] text-sm;
-          color: var(--p-inputtext-color);
-          background: var(--p-inputtext-background);
+          color: black;
+          background: transparent;
 
           &::placeholder {
             @apply opacity-80 font-normal text-sm;

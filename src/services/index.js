@@ -1,4 +1,4 @@
-import { axiosBase } from '@/utils/axios'
+import { axiosBase, axiosNoToken } from '@/utils/axios'
 
 export const requestLogin = ({ user_id, password }) => {
   let config = {
@@ -10,15 +10,14 @@ export const requestLogin = ({ user_id, password }) => {
     },
   }
 
-  return axiosBase(config)
+  return axiosNoToken(config)
 }
 
-export const requestLogout = (accessToken) => {
+export const requestLogout = () => {
   const config = {
     method: 'POST',
     url: '/api/auth/logout',
     data: {},
-    headers: { Authorization: `Bearer ${accessToken}` },
   }
 
   return axiosBase(config)
